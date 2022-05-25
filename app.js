@@ -1,15 +1,14 @@
 window.onload = () => {
-  //constructor
+  let myLibrary = [];
   class Book {
     constructor(author, title, pages, read) {
+      this.name = title;
       this.title = title;
       this.author = author;
       this.pages = pages;
       this.read = read;
     }
   }
-
-  let myLibrary = [];
 
   //función para añadir libros
   function addBook(author, title, pages, read) {
@@ -18,43 +17,30 @@ window.onload = () => {
   }
 
   //test
-  addBook("J.R.R. Tolkien", "The Hobbit", "399", false);
-  addBook("J.R.R. Tolkien", "The Hobbit", "399", true);
-  addBook("J.R.R. Tolkien", "The Hobbit", "399", true);
-  addBook("J.R.R. Tolkien", "The Hobbit", "399", true);
-  addBook("J.R.R. Tolkien", "The Hobbit", "399", true);
-  addBook("J.R.R. Tolkien", "The Hobbit", "399", true);
-  addBook("J.R.R. Tolkien", "The Hobbit", "399", true);
-  addBook("J.R.R. Tolkien", "The Hobbit", "399", true);
-  addBook("J.R.R. Tolkien", "The Hobbit", "399", false);
-  addBook("J.R.R. Tolkien", "The Hobbit", "399", true);
-  addBook("J.R.R. Tolkien", "The Hobbit", "399", true);
-  addBook("J.R.R. Tolkien", "The Hobbit", "399", true);
-  addBook("J.R.R. Tolkien", "The Hobbit", "399", true);
-  addBook("J.R.R. Tolkien", "The Hobbit", "399", true);
-  addBook("J.R.R. Tolkien", "The Hobbit", "399", true);
-  addBook("J.R.R. Tolkien", "The Hobbit", "399", true);
+  for (let i = 0; i < 12; i++) {
+    addBook("J.R.R. Tolkien", "The Hobbit", "399", false);
+  }
 
   //botón de añadir libros; spawn del form y toggles
   document.querySelector("#addBook").addEventListener("click", () => {
     document.querySelector(".addForm").classList.remove("inv");
     document.querySelector("#addBook").classList.add("inv");
-    document.querySelector("#submitButton").addEventListener("click", () => {
-      let author = document.querySelector("#author").value;
-      let title = document.querySelector("#title").value;
-      let pages = document.querySelector("#pages").value;
-      let read = document.querySelector("#read").checked;
+  });
+  document.querySelector("#submitButton").addEventListener("click", () => {
+    let author = document.querySelector("#author").value;
+    let title = document.querySelector("#title").value;
+    let pages = document.querySelector("#pages").value;
+    let read = document.querySelector("#read").checked;
 
-      if (author && title && pages) {
-        addBook(author, title, pages, read);
-        restartShowcase();
-        document.querySelector(".addForm").classList.add("inv");
-        document.querySelector("#addBook").classList.remove("inv");
-      } else {
-        console.log("error: bad input!");
-        return false;
-      }
-    });
+    if (author && title && pages) {
+      addBook(author, title, pages, read);
+      restartShowcase();
+      document.querySelector(".addForm").classList.add("inv");
+      document.querySelector("#addBook").classList.remove("inv");
+    } else {
+      alert("error: bad input!");
+      return false;
+    }
   });
 
   function restartShowcase() {
@@ -124,14 +110,14 @@ window.onload = () => {
           e.target.classList[1];
         n = n.slice(1);
         if (document.querySelector(`.n${n}`)) {
-          let getClasses = document.querySelector(`.n${n}`).classList;
-          if (getClasses.contains("rotateSide")) {
-            getClasses.remove("rotateSide");
-            getClasses.add("rotateFront");
-          } else if (!getClasses.contains("rotateSide")) {
-            getClasses.add("rotateSide");
-            if (getClasses.contains("rotateFront")) {
-              getClasses.remove("rotateFront");
+          let elementClassList = document.querySelector(`.n${n}`).classList;
+          if (elementClassList.contains("rotateSide")) {
+            elementClassList.remove("rotateSide");
+            elementClassList.add("rotateFront");
+          } else if (!elementClassList.contains("rotateSide")) {
+            elementClassList.add("rotateSide");
+            if (elementClassList.contains("rotateFront")) {
+              elementClassList.remove("rotateFront");
             }
           }
         }
